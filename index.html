@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom video player</title>
+    <link rel="icon" type="image/png" href="ed-dev-favicon-2.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="video-player">
+      <video src="video.mp4" class="video" playsinline></video>
+      <!-- Show/ hide controls -->
+      <div class="controls">
+        <!-- Controls container -->
+        <div class="controls-container">
+          <!-- Progress bar -->
+          <div class="progress" title="Seek">
+            <div class="progress-bar"></div>
+          </div>
+          <!-- Controls -->
+          <div class="control-group">
+            <!-- Left side controls -->
+            <div class="controls-left">
+              <!-- Play/ pause -->
+              <div class="play-controls">
+                <i
+                  class="fa-solid fa-circle-play"
+                  title="Play"
+                  id="play-button"
+                ></i>
+              </div>
+              <!-- Volume control -->
+              <div class="volume">
+                <div class="volume-icon">
+                  <i
+                    class="fa-solid fa-volume-high"
+                    title="Mute"
+                    id="volume-icon"
+                  ></i>
+                </div>
+                <div class="volume-range" title="Change volume">
+                  <div class="volume-bar"></div>
+                </div>
+              </div>
+            </div>
+            <!-- Right side controls -->
+            <div class="controls-right">
+              <!-- Playback speed -->
+              <div class="speed" title="Playback Rate">
+                <select name="playbackRate" class="playback-speed">
+                  <option value="0.5">0.5x</option>
+                  <option value="0.75">0.75x</option>
+                  <option value="1" selected>1x</option>
+                  <option value="1.5">1.5x</option>
+                  <option value="2.0">2.0x</option>
+                </select>
+              </div>
+              <!-- Duration -->
+              <div class="duration">
+                <span class="duration-elapsed">00:00 / </span>
+                <span class="total-duration">00:00</span>
+              </div>
+              <!-- Fulscreen -->
+              <div class="fullscreen">
+                <i class="fa-solid fa-expand" title="Fullscreen"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Script -->
+    <script src="script.js"></script>
+  </body>
+</html>
