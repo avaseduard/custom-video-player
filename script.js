@@ -1,3 +1,4 @@
+// DOM elements
 const videoPlayer = document.querySelector('.video-player');
 const videoElement = document.querySelector('video');
 const progressRange = document.querySelector('.progress');
@@ -11,10 +12,12 @@ const totalDuration = document.querySelector('.total-duration');
 const fullscreenButton = document.querySelector('.fullscreen');
 const playbackSpeed = document.querySelector('.playback-speed');
 
-// Play & Pause ----------------------------------- //
+// Play and pause
 // Show the play button and title
 const showPlayButton = function () {
+  // Change the icon
   playButton.classList.replace('fa-circle-pause', 'fa-circle-play');
+  // Change the title
   playButton.setAttribute('title', 'Play');
 };
 
@@ -22,7 +25,9 @@ const showPlayButton = function () {
 const playOrPause = function () {
   if (videoElement.paused) {
     videoElement.play();
+    // Change icon
     playButton.classList.replace('fa-circle-play', 'fa-circle-pause');
+    // Change title
     playButton.setAttribute('title', 'Pause');
   } else {
     videoElement.pause();
@@ -30,9 +35,10 @@ const playOrPause = function () {
   }
 };
 
+// Show the play butto after the video has ended
 videoElement.addEventListener('ended', showPlayButton);
 
-// Progress Bar ---------------------------------- //
+// Progress bar
 // Convert seconds to mm:ss
 const convertSeconds = seconds =>
   new Date(seconds * 1000).toISOString().substring(14, 19);
@@ -59,12 +65,12 @@ const setProgress = function (e) {
     (e.offsetX / progressRange.offsetWidth) * videoElement.duration;
 };
 
-// Volume Controls --------------------------- //
+// Volume controls
 let volume = 1;
 
-const changeVolume = function (e) {
+const changeVolume = function (event) {
   // Read the clicked position in the volume bar
-  let volumePosition = e.offsetX / volumeRange.offsetWidth;
+  let volumePosition = event.offsetX / volumeRange.offsetWidth;
   // Rounding the volume for min and max
   if (volumePosition < 0.1) volumePosition = 0;
   if (volumePosition > 0.9) volumePosition = 1;
@@ -73,46 +79,52 @@ const changeVolume = function (e) {
   // Volume change
   videoElement.volume = volumePosition;
   // Change the volume icon depending on volume value
-  volumeIcon.className = '';
-
+  volumeIcon.className = ''; // reset the class
+  // Add according classes
   if (volumePosition >= 0.7)
     volumeIcon.classList.add('fa-solid', 'fa-volume-high');
   if (volumePosition < 0.7 && volumePosition > 0)
     volumeIcon.classList.add('fa-solid', 'fa-volume-low');
   if (volumePosition === 0)
     volumeIcon.classList.add('fa-solid', 'fa-volume-xmark');
-
+  // Update the volume
   volumePosition = volume;
 };
 
-// Mute/ unmute
+// Mute and unmute
 const muteUnmute = function () {
+  // Reset the class
   volumeIcon.className = '';
-
+  // Mute
   if (videoElement.volume) {
+    // Set the volume to zero
     volume = videoElement.volume;
     videoElement.volume = 0;
     volumeBar.style.width = 0;
-
+    // Change icon
     volumeIcon.classList.add('fa-solid', 'fa-volume-xmark');
+    // Change title
     volumeIcon.setAttribute('title', 'Unmute');
   } else {
+    // Set the volume's level
     videoElement.volume = volume;
+    // Fill the bar accordingly
     volumeBar.style.width = `${volume * 100}%`;
-
+    // Change the icon
     volume >= 0.7
       ? volumeIcon.classList.add('fa-solid', 'fa-volume-high')
       : volumeIcon.classList.add('fa-solid', 'fa-volume-low');
+    // Change the title
     volumeIcon.setAttribute('title', 'Mute');
   }
 };
 
-// Change Playback Speed -------------------- //
+// Change Playback Speed
 const changePlaybackSpeed = function () {
   videoElement.playbackRate = playbackSpeed.value;
 };
 
-// Fullscreen ------------------------------- //
+// Fullscreen
 // View in fullscreen
 function openFullscreen(element) {
   if (element.requestFullscreen) {
